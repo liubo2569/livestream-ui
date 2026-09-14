@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>技术路线图 - 乡村振兴助农无人直播系统</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #e8e8ec;
+    display: flex;
+    justify-content: center;
+    padding: 30px 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+  .container {
+    width: 1100px;
+    max-width: 100%;
+    background: #f5f5f7;
+    border-radius: 18px;
+    padding: 36px 32px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .page-title { text-align: center; margin-bottom: 32px; }
+  .page-title .main-title { font-size: 26px; font-weight: 700; color: #1e3246; letter-spacing: 2px; }
+  .page-title .sub-title { font-size: 13px; color: #787896; margin-top: 4px; }
+  .page-title .bar { width: 60px; height: 3px; background: linear-gradient(90deg, #826ea0, #b4d2e6); margin: 10px auto 0; border-radius: 2px; }
+
+  .layers { display: flex; flex-direction: column; gap: 6px; }
+  .layer {
+    display: flex; align-items: stretch; gap: 0;
+    border-radius: 12px; overflow: hidden;
+    transition: all 0.2s;
+    border: 1px solid rgba(0,0,0,0.04);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+  }
+  .layer:hover { transform: translateX(3px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .layer-label {
+    width: 120px; min-width: 120px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 14px 8px;
+    font-size: 13px; font-weight: 700; color: #fff;
+    letter-spacing: 1px; text-align: center; line-height: 1.3;
+  }
+  .layer-label .layer-icon { font-size: 20px; margin-bottom: 2px; }
+  .layer-items { flex: 1; display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 14px; align-items: center; }
+  .tech-item {
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 7px;
+    padding: 6px 12px;
+    font-size: 12px; color: #3c3c50;
+    display: flex; align-items: center; gap: 6px;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .tech-item:hover { background: rgba(255,255,255,0.95); border-color: rgba(0,0,0,0.12); transform: translateY(-1px); }
+  .tech-item .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  .layer-p1 { background: #f0ecf5; }
+  .layer-p1 .layer-label { background: #826ea0; }
+  .layer-p1 .dot { background: #826ea0; }
+  .layer-p2 { background: #eaf0f8; }
+  .layer-p2 .layer-label { background: #7a9eb8; }
+  .layer-p2 .dot { background: #7a9eb8; }
+  .layer-p3 { background: #ecf2e8; }
+  .layer-p3 .layer-label { background: #7a9a7a; }
+  .layer-p3 .dot { background: #7a9a7a; }
+  .layer-p4 { background: #f5f0e8; }
+  .layer-p4 .layer-label { background: #b08a5a; }
+  .layer-p4 .dot { background: #b08a5a; }
+  .layer-p5 { background: #f5ecf0; }
+  .layer-p5 .layer-label { background: #a07a8a; }
+  .layer-p5 .dot { background: #a07a8a; }
+
+  .connector { display: flex; justify-content: center; padding: 1px 0; }
+  .connector .arrow { color: #b0b0c0; font-size: 14px; }
+
+  .flow-section { margin-top: 28px; padding-top: 24px; border-top: 1px solid #e0e0e8; }
+  .flow-section .flow-title { font-size: 15px; font-weight: 600; color: #1e3246; margin-bottom: 16px; text-align: center; }
+  .flow-diagram { display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; }
+  .flow-node { background: #fff; border: 1px solid #e0e0e8; border-radius: 10px; padding: 12px 18px; text-align: center; min-width: 90px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
+  .flow-node .fn-icon { font-size: 22px; }
+  .flow-node .fn-name { font-size: 11px; color: #3c3c50; margin-top: 3px; font-weight: 500; }
+  .flow-arrow { color: #b0b0c0; font-size: 18px; flex-shrink: 0; }
+
+  .tech-stack { margin-top: 28px; padding-top: 24px; border-top: 1px solid #e0e0e8; }
+  .tech-stack .stack-title { font-size: 15px; font-weight: 600; color: #1e3246; margin-bottom: 14px; text-align: center; }
+  .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+  .stack-card { background: #fff; border: 1px solid #e8e8f0; border-radius: 10px; padding: 14px 12px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
+  .stack-card:hover { border-color: #c0c0d0; transform: translateY(-1px); }
+  .stack-card .sc-icon { font-size: 24px; margin-bottom: 4px; }
+  .stack-card .sc-name { font-size: 13px; color: #1e3246; font-weight: 600; }
+  .stack-card .sc-desc { font-size: 11px; color: #888; margin-top: 2px; }
+  .stack-card .sc-tech { font-size: 10px; color: #aaa; margin-top: 3px; font-family: 'SF Mono', 'Consolas', monospace; }
+
+  .api-section { margin-top: 28px; padding-top: 24px; border-top: 1px solid #e0e0e8; }
+  .api-section .api-title { font-size: 15px; font-weight: 600; color: #1e3246; margin-bottom: 14px; text-align: center; }
+  .api-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; }
+  .api-card { background: #fff; border: 1px solid #e8e8f0; border-radius: 10px; padding: 12px; }
+  .api-card:hover { border-color: #c0c0d0; }
+  .api-card .api-icon { font-size: 18px; }
+  .api-card .api-name { font-size: 13px; color: #1e3246; font-weight: 600; margin-top: 3px; }
+  .api-card .api-desc { font-size: 11px; color: #666; margin-top: 3px; line-height: 1.4; }
+  .api-card .api-code { font-size: 10px; color: #826ea0; font-family: 'SF Mono', 'Consolas', monospace; margin-top: 3px; background: #f5f0f8; padding: 3px 6px; border-radius: 4px; display: inline-block; }
+
+  .detail-section { margin-top: 28px; padding-top: 24px; border-top: 1px solid #e0e0e8; }
+  .detail-section .detail-title { font-size: 15px; font-weight: 600; color: #1e3246; margin-bottom: 14px; text-align: center; }
+  .detail-table { width: 100%; border-collapse: collapse; }
+  .detail-table th, .detail-table td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #e8e8f0; font-size: 11px; }
+  .detail-table th { color: #787896; font-weight: 600; background: #eeecf2; }
+  .detail-table td { color: #3c3c50; }
+  .detail-table tr:hover td { background: #f8f6fa; }
+  .tag { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 10px; font-weight: 500; }
+  .tag-html { background: #e8e0f0; color: #7a5a8a; }
+  .tag-css { background: #dce8f4; color: #4a7a9a; }
+  .tag-js { background: #eae8d0; color: #8a7a30; }
+  .tag-api { background: #e8e0f0; color: #7a5a8a; }
+  .tag-python { background: #d8e8e0; color: #3a7a5a; }
+
+  .footer { margin-top: 24px; padding-top: 16px; border-top: 1px solid #e0e0e8; text-align: center; font-size: 11px; color: #a0a0b0; }
+
+  @media (max-width: 700px) {
+    .container { padding: 16px; }
+    .layer { flex-direction: column; }
+    .layer-label { width: 100%; min-width: unset; flex-direction: row; gap: 8px; padding: 8px; font-size: 12px; }
+    .page-title .main-title { font-size: 20px; }
+    .flow-diagram { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="page-title">
+    <div class="main-title">🏗 技术路线图</div>
+    <div class="sub-title">广州华商职业学院 · 乡村振兴助农无人直播系统</div>
+    <div class="bar"></div>
+  </div>
+
+  <div class="layers">
+    <div class="layer layer-p1">
+      <div class="layer-label"><span class="layer-icon">🖥</span>表现层</div>
+      <div class="layer-items">
+        <span class="tech-item"><span class="dot"></span>直播播放器界面</span>
+        <span class="tech-item"><span class="dot"></span>数字人IP形象</span>
+        <span class="tech-item"><span class="dot"></span>后台控制面板</span>
+        <span class="tech-item"><span class="dot"></span>弹幕浮动展示</span>
+        <span class="tech-item"><span class="dot"></span>数据看板</span>
+        <span class="tech-item"><span class="dot"></span>产品展示卡片</span>
+        <span class="tech-item"><span class="dot"></span>校徽品牌标识</span>
+      </div>
+    </div>
+    <div class="connector"><span class="arrow">▼</span></div>
+
+    <div class="layer layer-p2">
+      <div class="layer-label"><span class="layer-icon">🔄</span>交互层</div>
+      <div class="layer-items">
+        <span class="tech-item"><span class="dot"></span>鼠标拖拽移动</span>
+        <span class="tech-item"><span class="dot"></span>语速调节滑块</span>
+        <span class="tech-item"><span class="dot"></span>普通话/粤语切换</span>
+        <span class="tech-item"><span class="dot"></span>视频上传拖放</span>
+        <span class="tech-item"><span class="dot"></span>键盘快捷键</span>
+        <span class="tech-item"><span class="dot"></span>播放列表管理</span>
+      </div>
+    </div>
+    <div class="connector"><span class="arrow">▼</span></div>
+
+    <div class="layer layer-p3">
+      <div class="layer-label"><span class="layer-icon">⚙</span>业务逻辑层</div>
+      <div class="layer-items">
+        <span class="tech-item"><span class="dot"></span>无人直播引擎</span>
+        <span class="tech-item"><span class="dot"></span>AI智能回复</span>
+        <span class="tech-item"><span class="dot"></span>视频循环播放</span>
+        <span class="tech-item"><span class="dot"></span>语音合成TTS</span>
+        <span class="tech-item"><span class="dot"></span>弹幕抓取解析</span>
+        <span class="tech-item"><span class="dot"></span>数据模拟引擎</span>
+        <span class="tech-item"><span class="dot"></span>直播计时统计</span>
+      </div>
+    </div>
+    <div class="connector"><span class="arrow">▼</span></div>
+
+    <div class="layer layer-p4">
+      <div class="layer-label"><span class="layer-icon">🔗</span>平台接入层</div>
+      <div class="layer-items">
+        <span class="tech-item"><span class="dot"></span>🎵 抖音一键开播</span>
+        <span class="tech-item"><span class="dot"></span>🎥 快手一键开播</span>
+        <span class="tech-item"><span class="dot"></span>📺 B站一键开播</span>
+        <span class="tech-item"><span class="dot"></span>新标签页安全跳转</span>
+      </div>
+    </div>
+    <div class="connector"><span class="arrow">▼</span></div>
+
+    <div class="layer layer-p5">
+      <div class="layer-label"><span class="layer-icon">🗄</span>数据内容层</div>
+      <div class="layer-items">
+        <span class="tech-item"><span class="dot"></span>农产品信息库</span>
+        <span class="tech-item"><span class="dot"></span>弹幕消息记录</span>
+        <span class="tech-item"><span class="dot"></span>直播数据统计</span>
+        <span class="tech-item"><span class="dot"></span>多媒体素材</span>
+        <span class="tech-item"><span class="dot"></span>AI语料库</span>
+        <span class="tech-item"><span class="dot"></span>开场背景图</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-section">
+    <div class="flow-title">🔄 业务流程图</div>
+    <div class="flow-diagram">
+      <div class="flow-node"><div class="fn-icon">📁</div><div class="fn-name">添加视频</div></div>
+      <div class="flow-arrow">▶</div>
+      <div class="flow-node"><div class="fn-icon">🎬</div><div class="fn-name">选择模式</div></div>
+      <div class="flow-arrow">▶</div>
+      <div class="flow-node"><div class="fn-icon">🔴</div><div class="fn-name">开始直播</div></div>
+      <div class="flow-arrow">▶</div>
+      <div class="flow-node"><div class="fn-icon">🤖</div><div class="fn-name">AI播报</div></div>
+      <div class="flow-arrow">▶</div>
+      <div class="flow-node"><div class="fn-icon">💬</div><div class="fn-name">弹幕互动</div></div>
+      <div class="flow-arrow">▶</div>
+      <div class="flow-node"><div class="fn-icon">📊</div><div class="fn-name">数据看板</div></div>
+      <div class="flow-arrow">▶</div>
+      <div class="flow-node"><div class="fn-icon">🌟</div><div class="fn-name">助农增收</div></div>
+    </div>
+  </div>
+
+  <div class="tech-stack">
+    <div class="stack-title">🔧 核心技术栈</div>
+    <div class="stack-grid">
+      <div class="stack-card"><div class="sc-icon">🌐</div><div class="sc-name">HTML5</div><div class="sc-desc">语义化结构、video标签</div><div class="sc-tech">video · input[type=file]</div></div>
+      <div class="stack-card"><div class="sc-icon">🎨</div><div class="sc-name">CSS3</div><div class="sc-desc">Flex/Grid、动画、毛玻璃</div><div class="sc-tech">flexbox · keyframes · backdrop-filter</div></div>
+      <div class="stack-card"><div class="sc-icon">⚡</div><div class="sc-name">JavaScript</div><div class="sc-desc">DOM操作、事件驱动</div><div class="sc-tech">IIFE · addEventListener · closure</div></div>
+      <div class="stack-card"><div class="sc-icon">🗣</div><div class="sc-name">Web Speech API</div><div class="sc-desc">TTS语音合成</div><div class="sc-tech">SpeechSynthesisUtterance</div></div>
+      <div class="stack-card"><div class="sc-icon">🎞</div><div class="sc-name">HTML5 Video</div><div class="sc-desc">视频播放与控制</div><div class="sc-tech">play/pause · timeupdate</div></div>
+      <div class="stack-card"><div class="sc-icon">📂</div><div class="sc-name">File + Blob</div><div class="sc-desc">上传与URL创建</div><div class="sc-tech">createObjectURL · revoke</div></div>
+      <div class="stack-card"><div class="sc-icon">🎯</div><div class="sc-name">Drag & Drop</div><div class="sc-desc">拖拽上传与定位</div><div class="sc-tech">dragover · mousedown/move</div></div>
+      <div class="stack-card"><div class="sc-icon">📋</div><div class="sc-name">Clipboard</div><div class="sc-desc">粘贴上传视频</div><div class="sc-tech">paste · getAsFile</div></div>
+      <div class="stack-card"><div class="sc-icon">📱</div><div class="sc-name">响应式设计</div><div class="sc-desc">多端适配</div><div class="sc-tech">@media · 弹性布局</div></div>
+      <div class="stack-card"><div class="sc-icon">🐍</div><div class="sc-name">Python Pillow</div><div class="sc-desc">图片背景去除</div><div class="sc-tech">RGBA · threshold</div></div>
+      <div class="stack-card"><div class="sc-icon">🖼</div><div class="sc-name">SVG + Emoji</div><div class="sc-desc">矢量图与图标</div><div class="sc-tech">SVG path · Unicode</div></div>
+      <div class="stack-card"><div class="sc-icon">🖱</div><div class="sc-name">Mouse Events</div><div class="sc-desc">拖拽与进度条</div><div class="sc-tech">mousedown/move/up</div></div>
+    </div>
+  </div>
+
+  <div class="api-section">
+    <div class="api-title">📡 浏览器 API 明细</div>
+    <div class="api-grid">
+      <div class="api-card"><div class="api-icon">🗣</div><div class="api-name">SpeechSynthesis</div><div class="api-desc">调用系统TTS朗读中文/粤语，支持语速和音量调节</div><div class="api-code">speechSynthesis.speak(utterance)</div></div>
+      <div class="api-card"><div class="api-icon">🎬</div><div class="api-name">HTMLMediaElement</div><div class="api-desc">视频play/pause/seek，timeupdate实时更新进度</div><div class="api-code">player.play() · currentTime</div></div>
+      <div class="api-card"><div class="api-icon">📎</div><div class="api-name">URL.createObjectURL</div><div class="api-desc">视频文件转Blob URL，用完自动回收</div><div class="api-code">createObjectURL(file)</div></div>
+      <div class="api-card"><div class="api-icon">🔄</div><div class="api-name">Drag & Drop</div><div class="api-desc">文件拖拽上传 + 数字人拖拽定位</div><div class="api-code">dataTransfer.files · clientX/Y</div></div>
+      <div class="api-card"><div class="api-icon">📋</div><div class="api-name">ClipboardEvent</div><div class="api-desc">Ctrl+V粘贴识别视频文件</div><div class="api-code">clipboardData.getAsFile()</div></div>
+      <div class="api-card"><div class="api-icon">⌨</div><div class="api-name">KeyboardEvent</div><div class="api-desc">空格播放/暂停，方向键切视频</div><div class="api-code">keydown · code</div></div>
+      <div class="api-card"><div class="api-icon">🗂</div><div class="api-name">File Input</div><div class="api-desc">批量选择视频文件</div><div class="api-code">&lt;input multiple accept="video/*"&gt;</div></div>
+      <div class="api-card"><div class="api-icon">🎭</div><div class="api-name">CSS3 Animations</div><div class="api-desc">浮动、呼吸、弹幕滚动、脉冲动效</div><div class="api-code">@keyframes · transform</div></div>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="detail-title">📋 模块与技术对照表</div>
+    <table class="detail-table">
+      <tr><th>功能模块</th><th>实现技术</th><th>类型</th></tr>
+      <tr><td>直播视频播放器</td><td>HTML5 video + CSS object-fit</td><td><span class="tag tag-html">HTML5</span> <span class="tag tag-js">JS</span></td></tr>
+      <tr><td>视频循环播放</td><td>ended事件 + 列表索引 + createObjectURL</td><td><span class="tag tag-js">JS</span> <span class="tag tag-api">API</span></td></tr>
+      <tr><td>数字人IP形象</td><td>PNG透明图 + CSS浮动 + 拖拽定位</td><td><span class="tag tag-css">CSS</span> <span class="tag tag-js">JS</span></td></tr>
+      <tr><td>语音合成</td><td>SpeechSynthesis + zh-CN/zh-HK</td><td><span class="tag tag-api">API</span></td></tr>
+      <tr><td>语速/音量调节</td><td>range滑块 + utterance参数</td><td><span class="tag tag-html">HTML</span> <span class="tag tag-js">JS</span></td></tr>
+      <tr><td>AI智能回复弹幕</td><td>关键词正则 + 语料库 + setTimeout</td><td><span class="tag tag-js">JS</span></td></tr>
+      <tr><td>弹幕浮动展示</td><td>CSS animation + 随机颜色位置</td><td><span class="tag tag-css">CSS</span> <span class="tag tag-js">JS</span></td></tr>
+      <tr><td>直播数据看板</td><td>setInterval + DOM textContent</td><td><span class="tag tag-js">JS</span></td></tr>
+      <tr><td>产品展示卡片</td><td>Flexbox + backdrop-filter + 动画</td><td><span class="tag tag-css">CSS</span></td></tr>
+      <tr><td>多方式文件上传</td><td>File Input + Drag & Drop + Clipboard</td><td><span class="tag tag-api">API</span></td></tr>
+      <tr><td>播放列表管理</td><td>createElement + splice + 缩略图</td><td><span class="tag tag-js">JS</span></td></tr>
+      <tr><td>平台一键跳转</td><td>a标签 + target="_blank"</td><td><span class="tag tag-html">HTML</span></td></tr>
+      <tr><td>开播背景图</td><td>CSS background-image cover</td><td><span class="tag tag-css">CSS</span></td></tr>
+      <tr><td>图片叠加层</td><td>z-index分层 + toggle开关</td><td><span class="tag tag-css">CSS</span> <span class="tag tag-js">JS</span></td></tr>
+      <tr><td>学校标识</td><td>IMG + Flexbox头部 + 字体样式</td><td><span class="tag tag-html">HTML</span> <span class="tag tag-css">CSS</span></td></tr>
+      <tr><td>直播计时器</td><td>Date.now + setInterval</td><td><span class="tag tag-js">JS</span></td></tr>
+      <tr><td>观看人数模拟</td><td>Math.random + 定时更新</td><td><span class="tag tag-js">JS</span></td></tr>
+      <tr><td>图片去底</td><td>Pillow RGBA + 阈值过滤</td><td><span class="tag tag-python">Python</span></td></tr>
+      <tr><td>响应式适配</td><td>@media + flex-direction切换</td><td><span class="tag tag-css">CSS</span></td></tr>
+    </table>
+  </div>
+
+  <div class="footer">广州华商职业学院 · 乡村振兴助农直播系统 · 技术路线图 · 2026</div>
+</div>
+</body>
+</html>
